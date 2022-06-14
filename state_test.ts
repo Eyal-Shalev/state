@@ -19,29 +19,29 @@ Deno.test(function toggle() {
 });
 
 Deno.test(async function examplesChannel() {
-    let state = idle;
-    assertStrictEquals(state.promise, undefined);
+  let state = idle;
+  assertStrictEquals(state.promise, undefined);
 
-    state = state.send("hello");
-    assertThrows(() => state.send("goodbye"));
-    assertExists(state.promise);
-    let p = state.promise;
+  state = state.send("hello");
+  assertThrows(() => state.send("goodbye"));
+  assertExists(state.promise);
+  let p = state.promise;
 
-    state = state.get();
-    assertStrictEquals(state, idle);
-    assertEquals(await p, "hello");
+  state = state.get();
+  assertStrictEquals(state, idle);
+  assertEquals(await p, "hello");
 
-    state = state.get();
-    assertThrows(() => state.get());
-    assertExists(state.promise);
-    p = state.promise;
+  state = state.get();
+  assertThrows(() => state.get());
+  assertExists(state.promise);
+  p = state.promise;
 
-    state = state.send("goodbye");
-    assertStrictEquals(state, idle);
-    assertEquals(await p, "goodbye");
+  state = state.send("goodbye");
+  assertStrictEquals(state, idle);
+  assertEquals(await p, "goodbye");
 
-    state = state.close();
-    assertStrictEquals(state, closed);
-    assertThrows(() => state.send("hello"));
-    assertThrows(() => state.get());
-  });
+  state = state.close();
+  assertStrictEquals(state, closed);
+  assertThrows(() => state.send("hello"));
+  assertThrows(() => state.get());
+});

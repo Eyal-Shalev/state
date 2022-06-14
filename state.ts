@@ -42,4 +42,3 @@ type FnWithArgs<
   Base,
   Transition extends (keyof Map),
 > = (...args: Map[Transition]) => State<Names, Map, Base>;
-
